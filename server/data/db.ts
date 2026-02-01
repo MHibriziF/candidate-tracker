@@ -1,13 +1,12 @@
-import { Pool } from 'pg'
+import { Pool } from "pg";
 
 export const pool = new Pool({
-  connectionString: process.env.DATABASE_URL
-})
+  connectionString: process.env.DATABASE_URL,
+});
 
 export async function testConnection() {
-  const res = await pool.query('SELECT NOW()')
-  return res.rows[0]
+  const res = await pool.query("SELECT NOW()");
+  return res.rows[0];
 }
 
-export const query = (sql: string, params?: any[]) =>
-  pool.query(sql, params)
+export const query = (sql: string, params?: any[]) => pool.query(sql, params);
