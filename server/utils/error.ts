@@ -1,4 +1,4 @@
-import { createError } from "h3";
+import { createError } from 'h3';
 
 /**
  * Creates an error object with the given message and status code.
@@ -10,12 +10,7 @@ import { createError } from "h3";
  * @param {any} [cause] - The cause of the error.
  * @returns {Error} - The created error object.
  */
-export const AppError = (
-  statusCode = 500,
-  statusMessage: string,
-  message: string,
-  cause?: any,
-) => {
+export const AppError = (statusCode = 500, statusMessage: string, message: string, cause?: any) => {
   const err = createError({
     statusCode,
     statusMessage,
@@ -34,15 +29,12 @@ export const AppError = (
 };
 
 export const Errors = {
-  badRequest: (msg = "Bad request", err?: any) =>
-    AppError(400, "Bad request", msg, err),
+  badRequest: (msg = 'Bad request', err?: any) => AppError(400, 'Bad request', msg, err),
 
-  notFound: (msg = "Not found", err?: any) =>
-    AppError(404, "Not found", msg, err),
+  notFound: (msg = 'Not found', err?: any) => AppError(404, 'Not found', msg, err),
 
-  db: (msg = "Database error", err?: any) =>
-    AppError(500, "Internal server error", msg, err),
+  db: (msg = 'Database error', err?: any) => AppError(500, 'Internal server error', msg, err),
 
-  methodsNotAllowed: (msg = "Method not allowed", err?: any) =>
-    AppError(405, "Method not allowed", msg, err),
+  methodsNotAllowed: (msg = 'Method not allowed', err?: any) =>
+    AppError(405, 'Method not allowed', msg, err),
 };

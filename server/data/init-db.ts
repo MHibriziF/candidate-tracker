@@ -1,12 +1,12 @@
-import { query } from "./db";
-import { CandidateStatus } from "../types/candidate";
+import { query } from './db';
+import { CandidateStatus } from '../types/candidate';
 
-const debug = process.env.NODE_ENV !== "production";
+const debug = process.env.NODE_ENV !== 'production';
 
 export async function initDb() {
   if (debug) {
     await query(`DROP TABLE IF EXISTS candidates`);
-    console.warn("Dropped existing candidates table (debug mode)");
+    console.warn('Dropped existing candidates table (debug mode)');
   }
 
   // Create table
@@ -21,45 +21,47 @@ export async function initDb() {
     )
   `);
 
-  console.info("Candidates table ready");
+  console.info('Candidates table ready');
 
   // Seed dummy data if debug
   if (debug) {
-    console.info("Seeding dummy candidates...");
+    console.info('Seeding dummy candidates...');
     const dummyCandidates = [
       {
-        name: "Alice",
-        email: "alice@example.com",
-        phone: "+621234567890",
+        name: 'Alice',
+        email: 'alice@example.com',
+        phone: '+621234567890',
         status: CandidateStatus.NEW,
       },
       {
-        name: "Bob",
-        email: "bob@example.com",
-        phone: "+621234567891",
+        name: 'Bob',
+        email: 'bob@example.com',
+        phone: '+621234567891',
         status: CandidateStatus.CONTACTED,
       },
       {
-        name: "Charlie",
-        email: "charlie@example.com",
-        phone: "+621234567892",
+        name: 'Charlie',
+        email: 'charlie@example.com',
+        phone: '+621234567892',
         status: CandidateStatus.INTERESTED,
       },
       {
-        name: "Diana",
-        email: "diana@example.com",
-        phone: "+621234567893",
+        name: 'Diana',
+        email: 'diana@example.com',
+        phone: '+621234567893',
         status: CandidateStatus.REJECTED,
       },
     ];
 
     for (const c of dummyCandidates) {
-      await query(
-        `INSERT INTO candidates (name, email, phone, status) VALUES ($1, $2, $3, $4)`,
-        [c.name, c.email, c.phone, c.status],
-      );
+      await query(`INSERT INTO candidates (name, email, phone, status) VALUES ($1, $2, $3, $4)`, [
+        c.name,
+        c.email,
+        c.phone,
+        c.status,
+      ]);
     }
 
-    console.info("Dummy candidates seeded");
+    console.info('Dummy candidates seeded');
   }
 }

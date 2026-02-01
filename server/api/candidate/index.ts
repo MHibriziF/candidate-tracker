@@ -1,15 +1,12 @@
-import { candidateService } from "../../services/candidate.service";
-import { Errors } from "../../utils/error";
-import type {
-  CreateCandidateDto,
-  CandidateStatus,
-} from "../../types/candidate";
-import { readBody, getQuery } from "h3";
+import { candidateService } from '../../services/candidate.service';
+import { Errors } from '../../utils/error';
+import type { CreateCandidateDto, CandidateStatus } from '../../types/candidate';
+import { readBody, getQuery } from 'h3';
 
 export default defineEventHandler(async (event) => {
   const method = event.method;
 
-  if (method === "POST") {
+  if (method === 'POST') {
     const candidateData = await readBody<CreateCandidateDto>(event);
 
     try {
@@ -20,7 +17,7 @@ export default defineEventHandler(async (event) => {
     }
   }
 
-  if (method === "GET") {
+  if (method === 'GET') {
     const query = getQuery(event);
     const status = query.status as CandidateStatus | undefined;
 

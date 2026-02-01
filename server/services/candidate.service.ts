@@ -1,13 +1,6 @@
-import {
-  candidateRepository,
-  CandidateRepository,
-} from "../data/candidate.repository";
-import {
-  Candidate,
-  CandidateStatus,
-  CreateCandidateDto,
-} from "../types/candidate";
-import { Errors } from "../utils/error";
+import { candidateRepository, CandidateRepository } from '../data/candidate.repository';
+import { Candidate, CandidateStatus, CreateCandidateDto } from '../types/candidate';
+import { Errors } from '../utils/error';
 
 export class CandidateService {
   private static _instance: CandidateService;
@@ -25,14 +18,12 @@ export class CandidateService {
     // Validation & sanitization
     const { name, email, phone, status } = candidateData;
     if (!name || !email || !phone || !status) {
-      throw Errors.badRequest("Missing required candidate fields");
+      throw Errors.badRequest('Missing required candidate fields');
     }
-    if (!/\S+@\S+\.\S+/.test(email))
-      throw Errors.badRequest("Invalid email format");
-    if (!/^\+?[0-9]{7,15}$/.test(phone))
-      throw Errors.badRequest("Invalid phone number format");
+    if (!/\S+@\S+\.\S+/.test(email)) throw Errors.badRequest('Invalid email format');
+    if (!/^\+?[0-9]{7,15}$/.test(phone)) throw Errors.badRequest('Invalid phone number format');
     if (!Object.values(CandidateStatus).includes(status))
-      throw Errors.badRequest("Invalid candidate status");
+      throw Errors.badRequest('Invalid candidate status');
 
     const sanitized: CreateCandidateDto = {
       name: name.trim(),
@@ -52,10 +43,7 @@ export class CandidateService {
     return this.repo.getById(id);
   }
 
-  async updateCandidateStatus(
-    id: string,
-    status: CandidateStatus,
-  ): Promise<Candidate | null> {
+  async updateCandidateStatus(id: string, status: CandidateStatus): Promise<Candidate | null> {
     return this.repo.updateStatus(id, status);
   }
 

@@ -1,8 +1,8 @@
 export enum CandidateStatus {
-  NEW = "New",
-  CONTACTED = "Contacted",
-  INTERESTED = "Interested",
-  REJECTED = "Rejected",
+  NEW = 'New',
+  CONTACTED = 'Contacted',
+  INTERESTED = 'Interested',
+  REJECTED = 'Rejected',
 }
 
 export interface Candidate {
@@ -14,4 +14,4 @@ export interface Candidate {
   createdAt: string;
 }
 
-export type CreateCandidateDto = Omit<Candidate, "id" | "createdAt">;
+export type CreateCandidateDto = Omit<Candidate, 'id' | 'createdAt'>;
