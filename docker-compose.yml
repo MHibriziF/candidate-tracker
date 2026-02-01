@@ -1,0 +1,20 @@
+# bekerdja-recruiter/docker-compose.yml
+# Database for local development
+# Run with: docker-compose -f docker-compose.yml up -d
+
+services:
+  recruitment-db:
+    image: postgres:17.5-alpine
+    ports:
+      - "35001:5432"
+    restart: no
+    environment:
+      - POSTGRES_USER=recruitment-dev
+      - POSTGRES_PASSWORD=recruitment-dev
+      - POSTGRES_DB=recruitment-dev
+    volumes:
+      - recruitment-db:/var/lib/postgresql/data
+
+volumes:
+  recruitment-db:
+    driver: local
