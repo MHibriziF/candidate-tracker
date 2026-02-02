@@ -1,75 +1,34 @@
-# Nuxt Minimal Starter
+# Candidate Tracker
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+A web app to track and monitor progress of recruitment candidates.
 
-## Setup
+Deployment : https://candidate-tracker.mhibrizif.site
+Deepwiki: https://deepwiki.com/MHibriziF/candidate-tracker
 
-Make sure to install dependencies:
+## How to run locally
 
-```bash
-# npm
-npm install
+Prerequisites:
 
-# pnpm
-pnpm install
+- node.js & npm
 
-# yarn
-yarn install
+- PostgreSQL server or Docker
 
-# bun
-bun install
-```
+### Cloning repository
 
-## Development Server
+Clone this repository by running `git clone https://github.com/MHibriziF/candidate-tracker.git` in your desired directory.
 
-Start the development server on `http://localhost:3000`:
+Navigate to project by running `cd candidate-tracker`
 
-```bash
-# npm
-npm run dev
+### Running docker
 
-# pnpm
-pnpm dev
+If you have your own PostgreSQL server setup, you could skip this step and fill the `DATABASE_URL` for the `.env` file to your corresponding server.
 
-# yarn
-yarn dev
+If you are using docker to run PostgreSQL server locally, in the root of this project directory run `docker-compose up -d`. The PostgreSQL server should run shortly after
 
-# bun
-bun run dev
-```
+After running the database, make sure to fill `.env` using the value in `.env.example`.
 
-## Production
+### Running the web app
 
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+1. Install dependencies by running `npm i`
+2. Run the server by running `npm run dev`
+3. Check health and connection with database by running this api route `/api/health`
