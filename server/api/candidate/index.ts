@@ -20,10 +20,13 @@ export default defineEventHandler(async (event) => {
   if (method === 'GET') {
     const query = getQuery(event);
     const status = query.status as CandidateStatus | undefined;
+    const page = query.page ? parseInt(query.page as string, 10) : 1;
+    const perPage = query.perPage ? parseInt(query.perPage as string, 10) : 10;
+    const search = query.search as string | undefined;
 
     try {
-      const candidates = await candidateService.getAllCandidates(status);
-      return candidates;
+      const result = await candidateService.getAllCandidates(status, page, perPage, search);
+      return result;
     } catch (err: any) {
       throw Errors.db(err);
     }

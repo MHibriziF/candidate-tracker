@@ -35,8 +35,19 @@ export class CandidateService {
     return this.repo.create(sanitized);
   }
 
-  async getAllCandidates(status?: CandidateStatus): Promise<Candidate[]> {
-    return this.repo.getAll(status);
+  async getAllCandidates(
+    status?: CandidateStatus,
+    page: number = 1,
+    perPage: number = 10,
+    search?: string
+  ): Promise<{
+    data: Candidate[];
+    total: number;
+    page: number;
+    perPage: number;
+    totalPages: number;
+  }> {
+    return this.repo.getAll(status, page, perPage, search);
   }
 
   async getCandidateById(id: string): Promise<Candidate | null> {

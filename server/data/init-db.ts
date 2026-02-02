@@ -51,6 +51,60 @@ export async function initDb() {
         phone: '+621234567893',
         status: CandidateStatus.REJECTED,
       },
+      {
+        name: 'Ethan',
+        email: 'ethan@example.com',
+        phone: '+621234567894',
+        status: CandidateStatus.NEW,
+      },
+      {
+        name: 'Fiona',
+        email: 'fiona@example.com',
+        phone: '+621234567895',
+        status: CandidateStatus.CONTACTED,
+      },
+      {
+        name: 'George',
+        email: 'george@example.com',
+        phone: '+621234567896',
+        status: CandidateStatus.INTERESTED,
+      },
+      {
+        name: 'Hannah',
+        email: 'hannah@example.com',
+        phone: '+621234567897',
+        status: CandidateStatus.REJECTED,
+      },
+      {
+        name: 'Isaac',
+        email: 'isaac@example.com',
+        phone: '+621234567898',
+        status: CandidateStatus.NEW,
+      },
+      {
+        name: 'Jacob',
+        email: 'jacob@example.com',
+        phone: '+621234567899',
+        status: CandidateStatus.CONTACTED,
+      },
+      {
+        name: 'Kevin',
+        email: 'kevin@example.com',
+        phone: '+621234567890',
+        status: CandidateStatus.INTERESTED,
+      },
+      {
+        name: 'Liam',
+        email: 'liam@example.com',
+        phone: '+621234567891',
+        status: CandidateStatus.REJECTED,
+      },
+      {
+        name: 'Mason',
+        email: 'mason@example.com',
+        phone: '+621234567892',
+        status: CandidateStatus.NEW,
+      },    
     ];
 
     for (const c of dummyCandidates) {
