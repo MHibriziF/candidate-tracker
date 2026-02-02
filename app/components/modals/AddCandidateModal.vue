@@ -91,17 +91,17 @@ const closeModal = () => {
         <div class="space-y-4">
           <div>
             <label class="block mb-1 text-sm font-medium">Name *</label>
-            <UInput v-model="form.name" placeholder="Enter candidate name" />
+            <UInput v-model="form.name" placeholder="Enter candidate name" class="w-full"/>
           </div>
 
           <div>
             <label class="block mb-1 text-sm font-medium">Email *</label>
-            <UInput v-model="form.email" type="email" placeholder="Enter email address" />
+            <UInput v-model="form.email" type="email" placeholder="Enter email address" class="w-full"/>
           </div>
 
           <div>
             <label class="block mb-1 text-sm font-medium">Phone</label>
-            <UInput v-model="form.phone" type="tel" placeholder="Enter phone number" />
+            <UInput v-model="form.phone" type="tel" placeholder="Enter phone number" class="w-full"/>
           </div>
 
           <div>
@@ -110,6 +110,7 @@ const closeModal = () => {
               v-model="form.status"
               :items="statusOptions"
               placeholder="Select initial status"
+              class="w-full"
             />
           </div>
         </div>
