@@ -5,9 +5,10 @@ import type { Row } from '@tanstack/vue-table';
 import { useClipboard } from '@vueuse/core';
 import { CandidateStatus } from '../../server/types/candidate';
 import type { Candidate } from '../../server/types/candidate';
-import EditStatusModal from './EditStatusModal.vue';
-import DeleteConfirmationModal from './DeleteConfirmationModal.vue';
+import EditStatusModal from './modals/EditStatusModal.vue';
+import DeleteConfirmationModal from './modals/DeleteConfirmationModal.vue';
 import getStatusColor from '~/utils/status-color';
+import formatDate from '~/utils/format-date';
 
 interface Props {
   candidates: Candidate[];
@@ -103,19 +104,55 @@ function getRowItems(row: Row<Candidate>) {
 const columns: TableColumn<Candidate>[] = [
   {
     accessorKey: 'id',
-    header: 'ID'
+    header: 'ID',
+    cell: ({ row }) => {
+      const id = row.getValue('id') as string;
+      return h('span', { class: 'font-mono text-xs text-gray-500' }, id);
+    },
+    meta: {
+      class: {
+        th: 'hidden sm:table-cell',
+        td: 'hidden sm:table-cell'
+      }
+    }
   },
   {
     accessorKey: 'name',
-    header: 'Name'
+    header: 'Name',
+    meta: {
+      class: {
+        th: 'min-w-32',
+        td: 'font-medium'
+      }
+    }
   },
   {
     accessorKey: 'email',
-    header: 'Email'
+    header: 'Email',
+    cell: ({ row }) => {
+      const email = row.getValue('email') as string;
+      return h('span', { class: 'text-sm' }, email);
+    },
+    meta: {
+      class: {
+        th: 'hidden md:table-cell min-w-48',
+        td: 'hidden md:table-cell'
+      }
+    }
   },
   {
     accessorKey: 'phone',
-    header: 'Phone'
+    header: 'Phone',
+    cell: ({ row }) => {
+      const phone = row.getValue('phone') as string;
+      return h('span', { class: 'text-sm font-mono' }, phone);
+    },
+    meta: {
+      class: {
+        th: 'hidden lg:table-cell min-w-32',
+        td: 'hidden lg:table-cell'
+      }
+    }
   },
   {
     accessorKey: 'status',
@@ -124,16 +161,27 @@ const columns: TableColumn<Candidate>[] = [
       const status = row.getValue('status') as CandidateStatus;
       const color = getStatusColor(status);
       return h(UBadge, { 
-        class: 'capitalize', 
+        class: 'capitalize text-xs justify-center w-full', 
         variant: 'subtle', 
         color 
       }, () => status);
+    },
+    meta: {
+      class: {
+        th: 'min-w-24',
+      }
     }
   },
   {
     accessorKey: 'createdAt',
-    header: 'Applied At',
-    cell: ({ row }) => formatDate(row.getValue('createdAt') as string)
+    header: 'Applied',
+    cell: ({ row }) => formatDate(row.getValue('createdAt') as string),
+    meta: {
+      class: {
+        th: 'hidden sm:table-cell min-w-24',
+        td: 'hidden sm:table-cell text-sm text-gray-600'
+      }
+    }
   },
   {
     id: 'actions',
@@ -157,6 +205,7 @@ const columns: TableColumn<Candidate>[] = [
             icon: 'i-lucide-ellipsis-vertical',
             color: 'neutral',
             variant: 'ghost',
+            size: 'sm',
             'aria-label': 'Actions dropdown'
           })
       );
@@ -166,11 +215,11 @@ const columns: TableColumn<Candidate>[] = [
 </script>
 
 <template>
-  <div>
+  <div class="w-full">
     <UTable
       :data="candidates"
       :columns="columns"
-      class="w-full"
+      class="w-full min-w-full"
       :loading="pending"
     />
 

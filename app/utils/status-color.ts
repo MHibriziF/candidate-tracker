@@ -3,13 +3,13 @@ import { CandidateStatus } from '~~/server/types/candidate';
 const getStatusColor = (status: CandidateStatus) => {
   switch (status) {
     case CandidateStatus.NEW:
-      return 'blue' as const;
+      return 'secondary' as const;
     case CandidateStatus.CONTACTED:
-      return 'purple' as const;
+      return 'warning' as const;
     case CandidateStatus.INTERESTED:
-      return 'green' as const;
+      return 'primary' as const;
     case CandidateStatus.REJECTED:
-      return 'red' as const;
+      return 'error' as const;
     default:
       return 'gray' as const;
   }

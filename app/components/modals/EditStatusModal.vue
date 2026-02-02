@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { CandidateStatus } from '../../server/types/candidate';
-import type { Candidate } from '../../server/types/candidate';
+import { CandidateStatus } from '~~/server/types/candidate';
+import type { Candidate } from '~~/server/types/candidate';
 
 interface Props {
   open: boolean;
@@ -95,16 +95,18 @@ const closeModal = () => {
         </div>
 
         <template #footer>
-          <div class="flex justify-end gap-2">
+          <div class="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
             <UButton
               color="neutral"
               variant="ghost"
+              class="w-full sm:w-auto"
               @click="closeModal"
             >
               Cancel
             </UButton>
             <UButton
               color="primary"
+              class="w-full sm:w-auto"
               @click="updateStatus"
               :disabled="!newStatus"
             >
