@@ -1,5 +1,6 @@
 import { candidateRepository, CandidateRepository } from '../data/candidate.repository';
 import { Candidate, CandidateStatus, CreateCandidateDto } from '../types/candidate';
+import { Statistics } from '../types/statistics';
 import { Errors } from '../utils/error';
 
 export class CandidateService {
@@ -60,6 +61,28 @@ export class CandidateService {
 
   async deleteCandidate(id: string): Promise<Candidate | null> {
     return this.repo.delete(id);
+  }
+
+  async getStatistics(start?: string, end?: string): Promise<Statistics> {
+    const today = new Date();
+
+    const defaultEnd = today.toISOString().slice(0, 10);
+
+    const threeMonthsAgo = new Date();
+    threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
+
+    const defaultStart = threeMonthsAgo.toISOString().slice(0, 10);
+
+    const safeStart = start || defaultStart;
+    const safeEnd = end || defaultEnd;
+
+    const totalCandidates = (await this.repo.getAll()).total;
+
+    return {
+      totalCandidates,
+      candidatesByStatus: await this.repo.countByStatusRange(safeStart, safeEnd),
+      candidatesByMonth: await this.repo.countByMonthRange(safeStart, safeEnd),
+    };
   }
 }
 
