@@ -8,13 +8,8 @@ export default defineEventHandler(async (event) => {
 
   if (method === 'POST') {
     const candidateData = await readBody<CreateCandidateDto>(event);
-
-    try {
-      const newCandidate = await candidateService.addCandidate(candidateData);
-      return newCandidate;
-    } catch (err: any) {
-      throw err;
-    }
+    const newCandidate = await candidateService.addCandidate(candidateData);
+    return newCandidate;
   }
 
   if (method === 'GET') {

@@ -32,18 +32,32 @@ onMounted(() => {
 })
 
 const applyRange = () => {
-  if (!startMonth.value || !endMonth.value) return
+  // Validate data not empty and start <= end
+  if (!startMonth.value || !endMonth.value) {
+    error.value = 'Start month and end month must be selected'
+    return
+  }
 
-  // ubah jadi tanggal valid untuk backend
-  const start = `${startMonth.value}-01`
+  const start = new Date(`${startMonth.value}-01`)
+  const end = new Date(`${endMonth.value}-01`)
+
+  if (start > end) {
+    error.value = 'Start month cannot be after end month'
+    return
+  }
+
+  error.value = null
+
+  // format untuk backend
+  const startStr = `${startMonth.value}-01`
 
   const endDate = new Date(endMonth.value + '-01')
   endDate.setMonth(endDate.getMonth() + 1)
   endDate.setDate(0)
 
-  const end = endDate.toISOString().slice(0, 10)
+  const endStr = endDate.toISOString().slice(0, 10)
 
-  fetchStatistics(start, end)
+  fetchStatistics(startStr, endStr)
 }
 </script>
 
@@ -56,7 +70,6 @@ const applyRange = () => {
       color="error"
       variant="outline"
       :title="error"
-      close
     />
 
     <!-- LOADING -->

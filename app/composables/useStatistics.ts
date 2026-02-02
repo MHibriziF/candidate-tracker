@@ -80,7 +80,7 @@ export const useStatistics = () => {
     // Data
     data: readonly(data),
     pending: readonly(pending),
-    error: readonly(error),
+    error,
 
     // Chart data
     statusChartData,
