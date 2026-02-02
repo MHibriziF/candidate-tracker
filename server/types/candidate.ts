@@ -6,12 +6,12 @@ export enum CandidateStatus {
 }
 
 export interface Candidate {
-  id: string
-  name: string
-  email: string
-  phone: string
-  status: CandidateStatus
-  createdAt: string
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  status: CandidateStatus;
+  createdAt: string;
 }
 
-export type CreateCandidateDto = Omit<Candidate, 'id' | 'createdAt'>
+export type CreateCandidateDto = Omit<Candidate, 'id' | 'createdAt'>;
