@@ -12,7 +12,9 @@ useHead({
 
 <template>
     <UApp>
-      <NuxtRouteAnnouncer />
-      <NuxtPage />
+      <NuxtLayout >
+        <NuxtRouteAnnouncer />
+        <NuxtPage />
+      </NuxtLayout>
     </UApp>
 </template>

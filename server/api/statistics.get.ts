@@ -1,5 +1,4 @@
 import { candidateService } from '../services/candidate.service';
-import { Errors } from '../utils/error';
 import { getQuery } from 'h3';
 
 export default defineEventHandler(async (event) => {

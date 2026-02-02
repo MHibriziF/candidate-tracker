@@ -76,12 +76,24 @@ export class CandidateService {
     const safeStart = start || defaultStart;
     const safeEnd = end || defaultEnd;
 
+    if (new Date(safeStart) > new Date(safeEnd)) {
+      throw Errors.badRequest('Start date cannot be after end date');
+    }
+
     const totalCandidates = (await this.repo.getAll()).total;
+    const candidatesByStatus = await this.repo.countByStatusRange(safeStart, safeEnd);
+    const candidatesByMonth = await this.repo.countByMonthRange(safeStart, safeEnd);
+
+    const totalByRange = Object.values(candidatesByMonth).reduce(
+      (sum, val) => sum + Number(val),
+      0
+    );
 
     return {
       totalCandidates,
-      candidatesByStatus: await this.repo.countByStatusRange(safeStart, safeEnd),
-      candidatesByMonth: await this.repo.countByMonthRange(safeStart, safeEnd),
+      totalByRange,
+      candidatesByStatus,
+      candidatesByMonth,
     };
   }
 }

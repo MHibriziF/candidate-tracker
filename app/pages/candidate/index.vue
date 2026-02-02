@@ -1,7 +1,10 @@
-
 <script setup lang="ts">
-import { CandidateStatus, type CreateCandidateDto } from '../../../server/types/candidate';
+import { CandidateStatus } from '../../../server/types/candidate';
 import AddCandidateModal from '../../components/modals/AddCandidateModal.vue';
+
+definePageMeta({
+  title: 'Recruitment'
+});
 
 const {
   candidates,
@@ -55,7 +58,7 @@ const limitOptions = ref([
 
 <template>
   <div class="container mx-auto px-4 py-4 sm:px-6 lg:px-8">
-    <h1 class="text-xl sm:text-2xl font-bold mb-4">Candidates</h1>
+    <h1 class="text-xl sm:text-2xl font-bold mb-4 mt-4">Candidates</h1>
 
     <!-- Search and Filters -->
     <div class="flex flex-col gap-4 mb-6 sm:flex-row sm:items-end">
